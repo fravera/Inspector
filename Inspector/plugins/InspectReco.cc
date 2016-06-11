@@ -1,9 +1,9 @@
 // -*- C++ -*-
 //
-// Package:    Demo/InspectReco
+// Package:    Inspector/InspectReco
 // Class:      InspectReco
 // 
-/**\class InspectReco InspectReco.cc Demo/InspectReco/plugins/InspectReco.cc
+/**\class InspectReco InspectReco.cc Inspector/InspectReco/plugins/InspectReco.cc
 
  Description: [one line class summary]
 
@@ -109,7 +109,9 @@ class InspectReco : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       TH1D *hRecoProtonXiArmForward;
       TH1D *hRecoProtonXiArmBackward;
       TH1D *hRecoDiProtonMissingMass;
-
+      TH1D *hRecoDiProtonMissingMassBothTrk;
+      TH1D *hRecoDiProtonMissingMassOneTrkMissing;
+      
       //Reco-Gen Comparison plots
       //Photon plots
       TH1D *hRecoGenComparisonPhotonDeltaR;
@@ -196,7 +198,9 @@ InspectReco::InspectReco(const edm::ParameterSet& iConfig)
    hRecoProtonXiArmForward = dirReco_ProtonPlot.make<TH1D>("hRecoProtonXiArmForward","Reco Proton Xi - Arm Forward",100,0.,0.5);
    hRecoProtonXiArmBackward = dirReco_ProtonPlot.make<TH1D>("hRecoProtonXiArmBackward","Reco Proton Xi - Arm Backward",100,0.,0.5);
    hRecoDiProtonMissingMass = dirReco_ProtonPlot.make<TH1D>("hRecoDiProtonMissingMass","Reco DiProton Missing Mass",200,0.,2000.);
-
+   hRecoDiProtonMissingMassBothTrk = dirReco_ProtonPlot.make<TH1D>("hRecoDiProtonMissingMassBothTrk","Reco DiProton Missing Mass Both Trk",200,0.,2000.);
+   hRecoDiProtonMissingMassOneTrkMissing = dirReco_ProtonPlot.make<TH1D>("hRecoDiProtonMissingMassOneTrkMissing","Reco DiProton Missing Mass One Trk Missing",200,0.,2000.);
+      
    //Reco-Gen Comparison plot
    TFileDirectory dirRecoGenComparisonPlot = fs->mkdir( "RecoGenComparisonPlots" );
    //Photon plots
@@ -418,11 +422,15 @@ InspectReco::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       double xiProtonArmF = recoPPS->ArmF.Tracks.at(iArmF).xi;
       xiProtonArmFReco = xiProtonArmF;
       hRecoProtonXiArmForward->Fill(xiProtonArmF);
+      //PPSRecoTrack *trackForward = &(fReco->ArmF.Tracks)->at(i).Det1
       for(size_t iArmB=0; iArmB<recoPPS->ArmB.Tracks.size(); ++iArmB){
          double xiProtonArmB = recoPPS->ArmB.Tracks.at(iArmB).xi;
          xiProtonArmBReco = xiProtonArmB;
          hRecoProtonXiArmBackward->Fill(xiProtonArmB);
+         //PPSRecoTrack *trackBackward = &(recoPPS->ArmB.get_Track(iArmB));
          hRecoDiProtonMissingMass->Fill(13000.*TMath::Sqrt(xiProtonArmF*xiProtonArmB));
+         if(recoPPS->ArmF.Tracks.at(iArmF).Det1.X != 0. && recoPPS->ArmF.Tracks.at(iArmF).Det2.X != 0. && recoPPS->ArmB.Tracks.at(iArmB).Det1.X != 0. && recoPPS->ArmB.Tracks.at(iArmB).Det2.X != 0.) hRecoDiProtonMissingMassBothTrk->Fill(13000.*TMath::Sqrt(xiProtonArmF*xiProtonArmB));
+         if(recoPPS->ArmF.Tracks.at(iArmF).Det1.X == 0. || recoPPS->ArmF.Tracks.at(iArmF).Det2.X == 0. || recoPPS->ArmB.Tracks.at(iArmB).Det1.X == 0. || recoPPS->ArmB.Tracks.at(iArmB).Det2.X == 0.) hRecoDiProtonMissingMassOneTrkMissing->Fill(13000.*TMath::Sqrt(xiProtonArmF*xiProtonArmB));
       }
    }
 

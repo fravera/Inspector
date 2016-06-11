@@ -1,9 +1,9 @@
 // -*- C++ -*-
 //
-// Package:    Demo/InspectGenerator
+// Package:    Inspector/InspectGenerator
 // Class:      InspectGenerator
 // 
-/**\class InspectGenerator InspectGenerator.cc Demo/InspectGenerator/plugins/InspectGenerator.cc
+/**\class InspectGenerator InspectGenerator.cc Inspector/InspectGenerator/plugins/InspectGenerator.cc
 
  Description: [one line class summary]
 
