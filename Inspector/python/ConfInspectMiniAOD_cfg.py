@@ -34,7 +34,7 @@ process.demo = cms.EDAnalyzer('InspectMiniAOD'
 
 process.TFileService = cms.Service("TFileService",
                                        #fileName = cms.string('/afs/cern.ch/work/f/fravera/Resonance/NewFastSim/CMSSW_8_0_2/src/histoInspectReco_trackingOnly.root')
-                                       fileName = cms.string('histoInspectReco_miniAOD.root')
+                                       fileName = cms.string('histoInspectMiniAOD.root')
                                        # fileName = cms.string('/afs/cern.ch/work/f/fravera/Resonance/NewFastSim/CMSSW_8_0_2/src/histoInspectReco_prova_10Events.root')
                                        #fileName = cms.string('/afs/cern.ch/work/f/fravera/Resonance/CMSSW_8_0_2/src/histoInspectReco_trackingOnly.root')
                                    )
