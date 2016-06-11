@@ -13,7 +13,8 @@ process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
         #'file:/afs/cern.ch/work/f/fravera/Resonance/CMSSW_8_0_2/src/step_FastSimPPS_SIM_RECOBEFMIX_DIGI_L1_L1Reco_RECO_HLT_10kEvents.root'
         #'file:/afs/cern.ch/work/f/fravera/Resonance/NewFastSim/CMSSW_8_0_2/src/step_FastSimPPS_SIM_RECOBEFMIX_DIGI_L1_L1Reco_RECO_HLT_trackingOnly.root'
-        'file:/afs/cern.ch/work/f/fravera/Resonance/NewFastSim/CMSSW_8_0_2/src/step_FastSimPPS_SIM_RECOBEFMIX_DIGI_L1_L1Reco_RECO_HLT_trackingWithTOF_10kEvents.root'
+        # 'file:/afs/cern.ch/work/f/fravera/Resonance/NewFastSim/CMSSW_8_0_2/src/step_FastSimPPS_SIM_RECOBEFMIX_DIGI_L1_L1Reco_RECO_HLT_trackingWithTOF_10kEvents.root'
+        'file:miniAOD_PAT.root'
         # 'file:/afs/cern.ch/work/f/fravera/Resonance/NewFastSim/CMSSW_8_0_2/src/step_FastSimPPS_SIM_RECOBEFMIX_DIGI_L1_L1Reco_RECO_HLT_prova_10Events.root'
         # 'root://xrootd.unl.edu//store/user/fravera/FPMC_aaaa_AAexoticSpin0EvenResonances_13TeV/CT_PPS_FastSim_Spin0Resonance/160511_164803/0000/step_FastSimPPS_SIM_RECOBEFMIX_DIGI_L1_L1Reco_RECO_HLT_1.root',
         # 'root://xrootd.unl.edu//store/user/fravera/FPMC_aaaa_AAexoticSpin0EvenResonances_13TeV/CT_PPS_FastSim_Spin0Resonance/160511_164803/0000/step_FastSimPPS_SIM_RECOBEFMIX_DIGI_L1_L1Reco_RECO_HLT_2.root',
@@ -28,12 +29,12 @@ process.source = cms.Source("PoolSource",
     )
 )
 
-process.demo = cms.EDAnalyzer('InspectReco'
+process.demo = cms.EDAnalyzer('InspectMiniAOD'
 )
 
 process.TFileService = cms.Service("TFileService",
                                        #fileName = cms.string('/afs/cern.ch/work/f/fravera/Resonance/NewFastSim/CMSSW_8_0_2/src/histoInspectReco_trackingOnly.root')
-                                       fileName = cms.string('/afs/cern.ch/work/f/fravera/Resonance/NewFastSim/CMSSW_8_0_2/src/histoInspectReco_trackingWithTOF_10kEvents.root')
+                                       fileName = cms.string('histoInspectReco_miniAOD.root')
                                        # fileName = cms.string('/afs/cern.ch/work/f/fravera/Resonance/NewFastSim/CMSSW_8_0_2/src/histoInspectReco_prova_10Events.root')
                                        #fileName = cms.string('/afs/cern.ch/work/f/fravera/Resonance/CMSSW_8_0_2/src/histoInspectReco_trackingOnly.root')
                                    )
