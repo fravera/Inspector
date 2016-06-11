@@ -263,7 +263,7 @@ InspectReco::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       const reco::GenParticle &particle = (*particleGenCollection)[i];
       int particleId = particle.pdgId();
       hGenParticleID->Fill(particleId);
-      if(particle.status()!=1) continue; //exclude particle not in the final state
+      if(particle.status()!=1) continue; //exclude particle not in the final state.
       // std::cout << "Particle Id = " << particleId << std::endl;
 
       if(particleId == 22){ //select only photons
