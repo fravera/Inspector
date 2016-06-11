@@ -4,7 +4,7 @@ process = cms.Process("DemoAnalysis")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(100) )
 
 process.source = cms.Source("PoolSource",
     # replace 'myfile.root' with the source file you want to use
@@ -34,7 +34,7 @@ process.demo = cms.EDAnalyzer('InspectReco'
 
 process.TFileService = cms.Service("TFileService",
                                        #fileName = cms.string('/afs/cern.ch/work/f/fravera/Resonance/NewFastSim/CMSSW_8_0_2/src/histoInspectReco_trackingOnly.root')
-                                       fileName = cms.string('histoInspectReco_trackingWithToF_10kEvents.root')
+                                       fileName = cms.string('histoInspectReco_trackingWithToF_100Events.root')
                                        # fileName = cms.string('/afs/cern.ch/work/f/fravera/Resonance/NewFastSim/CMSSW_8_0_2/src/histoInspectReco_prova_10Events.root')
                                        #fileName = cms.string('/afs/cern.ch/work/f/fravera/Resonance/CMSSW_8_0_2/src/histoInspectReco_trackingOnly.root')
                                    )
